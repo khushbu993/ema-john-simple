@@ -25,7 +25,7 @@ const Review = () => {
         //cart
         const saveCart = getDatabaseCart();
         const productKeys = Object.keys(saveCart);
-        fetch('http://localhost:5000/productsByKey', {
+        fetch('https://limitless-tundra-96054.herokuapp.com/productsByKey', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

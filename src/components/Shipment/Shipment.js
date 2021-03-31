@@ -12,7 +12,7 @@ const Shipment = () => {
       const saveCart = getDatabaseCart();
       const orderDetail = {...loggedInUser, products: saveCart, shipment: data, orderTime: new Date()};
 
-      fetch('http://localhost:5000/addOrder', {
+      fetch('https://limitless-tundra-96054.herokuapp.com/addOrder', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
