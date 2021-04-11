@@ -8,12 +8,13 @@ const Shop = () => {
     const [products, setProducts] = useState([]);
     // Shopping-cart state
     const [cart, setCart] = useState([]);
-
+    const [search, setSearch] = useState('');
+    
     useEffect(() => {
-        fetch('https://limitless-tundra-96054.herokuapp.com/products')
+        fetch('https://limitless-tundra-96054.herokuapp.com/products?search='+search)
             .then(res => res.json())
             .then(data => setProducts(data))
-    }, [])
+    }, [search]);
 
     useEffect(() => {
         const saveCart = getDatabaseCart();
@@ -27,7 +28,11 @@ const Shop = () => {
         })
             .then(res => res.json())
             .then(data => setCart(data))
-    }, [])
+    }, []);
+
+    const handleSearch = event => {
+        setSearch(event.target.value);
+    }
 
     const handleAddProduct = (product) => {
         const toBeAddedKey = product.key;
@@ -50,6 +55,7 @@ const Shop = () => {
     return (
         <div className="twin-container">
             <div className="product-container">
+                <input type="text" onBlur={handleSearch} className="product-container" placeholder="Search"/>
                 {
                     products.map(productData => <Product
                         key={productData.key}
