@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getDatabaseCart, processOrder, removeFromDatabaseCart } from '../../utilities/databaseManager';
+import { getDatabaseCart, removeFromDatabaseCart } from '../../utilities/databaseManager';
 import Cart from '../Cart/Cart';
 import ReviewItem from '../ReviewItem/ReviewItem';
 import happyImage from '../../images/giphy.gif';
@@ -7,10 +7,10 @@ import { useHistory } from 'react-router';
 
 const Review = () => {
     const [cart, setCart] = useState([]);
-    const [orderPlaced, setOrderPlaced] = useState(false);
+    const [orderPlaced] = useState(false);
     const history = useHistory();
 
-    
+
     const handleProceedCheckout = () => {
         history.push('/shipment');
     }
@@ -32,13 +32,13 @@ const Review = () => {
             },
             body: JSON.stringify(productKeys)
         })
-        .then(res => res.json())
-        .then(data => setCart(data))
+            .then(res => res.json())
+            .then(data => setCart(data))
     }, [])
 
     let thankYou;
-    if(orderPlaced) {
-        thankYou = <img src = {happyImage} alt = ""/>
+    if (orderPlaced) {
+        thankYou = <img src={happyImage} alt="" />
     }
 
     return (
@@ -54,7 +54,7 @@ const Review = () => {
             </div>
             <div className="cart-container">
                 <Cart cart={cart}>
-                    <button onClick = {handleProceedCheckout} className="product-button">Proceed Checkout</button>
+                    <button onClick={handleProceedCheckout} className="product-button">Proceed Checkout</button>
                 </Cart>
             </div>
         </div>

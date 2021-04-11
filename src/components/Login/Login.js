@@ -17,38 +17,38 @@ function Login() {
   });
 
   initializeLoginFramework();
-  const [loggedInUser, setLoggedInUser] = useContext(userContext);
+  const [setLoggedInUser] = useContext(userContext);
   const history = useHistory();
   const location = useLocation();
   let { from } = location.state || { from: { pathname: "/" } };
 
   const googleSignIn = () => {
     handleGoogleSignIn()
-    .then(res => {
-      handleResponse(res, true);
-    })
+      .then(res => {
+        handleResponse(res, true);
+      })
   }
 
   const fbSignIn = () => {
     handleFbSignIn()
-    .then(res => {
-      handleResponse(res, true);
-    })
+      .then(res => {
+        handleResponse(res, true);
+      })
   }
 
   const signOut = () => {
     handleSignOut()
-    .then(res => {
-      handleResponse(res, false);
-    })
+      .then(res => {
+        handleResponse(res, false);
+      })
   }
-const handleResponse = (res, redirect) => {
-  setUser(res);
-  setLoggedInUser(res);
-  if(redirect){
-    history.replace(from);
+  const handleResponse = (res, redirect) => {
+    setUser(res);
+    setLoggedInUser(res);
+    if (redirect) {
+      history.replace(from);
+    }
   }
-}
 
   const handleBlur = (event) => {
     let isFieldValid = true;
@@ -72,16 +72,16 @@ const handleResponse = (res, redirect) => {
     // console.log(user.email, user.password)
     if (newUser && user.email && user.password) {
       createUserWithEmailAndPassword(user.name, user.email, user.password)
-      .then(res => {
-        handleResponse(res, true);
-      })
+        .then(res => {
+          handleResponse(res, true);
+        })
     }
 
     if (!newUser && user.email && user.password) {
       signInWithEmailAndPassword(user.email, user.password)
-      .then(res => {
-        handleResponse(res, true);
-      })
+        .then(res => {
+          handleResponse(res, true);
+        })
     }
 
 
@@ -90,14 +90,14 @@ const handleResponse = (res, redirect) => {
 
 
   return (
-    <div style={{textAlign: 'center'}}>
+    <div style={{ textAlign: 'center' }}>
       {
         user.isSignedIn ? <button onClick={signOut}>Sign Out</button> :
           <button onClick={googleSignIn}>Google Sign In</button>
-      }<br/><br/>
+      }<br /><br />
       {
         user.isSignedIn ? '' :
-        <button onClick={fbSignIn}>Facebook Sign In</button>
+          <button onClick={fbSignIn}>Facebook Sign In</button>
       }
 
       {

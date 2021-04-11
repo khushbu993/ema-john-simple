@@ -48,6 +48,7 @@ export const handleFbSignIn = () => {
     .then((result) => {
       var credential = result.credential;
       var accessToken = credential.accessToken;
+      console.log(accessToken);
       var user = result.user;
       user.success = true;
       return user;
